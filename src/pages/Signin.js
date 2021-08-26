@@ -1,39 +1,47 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Input from '../components/Input';
 
+/* Componentes */
+import Register from '../components/Register/';
+import Login from '../components/Login/';
+//recibe la variable de token.
+const Signin = ({
+    setToken
+  }) => {
 
-const Signin = () => {
-
-    const [ login, setLogin ] = useState (true);
-    
-    
+    const [ login, setLogin ] = useState (true);   
 
     return (
         <>
-        <h1 className="text-center my-4">Bienvenidos a Movies !!!</h1>
-        <div className="text-center ">
-        
-        {login ?(
-            <p>
-                ¿No estás registrado? ¿Qué esperás?{' '}
-                <Link className="text-center" to="#" onClick={() => setLogin(false)}>Registrate!</Link>
-            </p> ):
-            (<p>
+        <h1 className="text-center my-4">Bienvenid@s a MoviesReact</h1>
+            <div>
+            <div className="text-center">
+        {login ? (
+          <p>
+            ¿No estás registrado? ¿Qué esperás?{' '}
+            <Link
+              to="#"
+              className="text-center"
+              onClick={() => setLogin(false)}
+            >
+              Registrate!
+            </Link>
+          </p>
+        ) : (
+          <p>
             ¿Ya estás registrado?{' '}
-            <Link className="text-center" to="#" onClick={() => setLogin(true)}>Iniciá Sesión!</Link>
-            </p>)}
-            
-        </div>
-        {login ? <p>Logín</p> : <p>Registro</p>}
-        <Input
-        name="nombre" 
-        type="text"
-        placeholder="Nombre..."
-        label="Nombre: "
-        defaultValue="Eric"
-        error= {{message: 'error'}}
-        />
+            <Link
+              to="#"
+              className="text-center"
+              onClick={() => setLogin(true)}
+            >
+              Logueate!
+            </Link>
+          </p>
+        )}
+      </div>
+      {login ? <Login /> : <Register setToken={setToken}/>}
+            </div>
         </>
     )
 

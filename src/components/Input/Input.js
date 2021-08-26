@@ -1,3 +1,5 @@
+import './Input.css'
+
 const Input = ({
     type,
     className="",
@@ -6,6 +8,7 @@ const Input = ({
     label,
     defaultValue,
     register,
+    validation,
     error
 }) => {
 
@@ -15,9 +18,13 @@ const Input = ({
                 {label && label} {/* condicionales */}
                 <input type={type}
                 name={name}
+                label= {label}
                 placeholder={placeholder}
                 defaultValue={defaultValue}
-                className={`form-control ${error ? 'is-invalid' : ''}`}
+                className={`form-control ${error ? 'input-error' : ''}`}
+                {...register(name,validation)}
+                autoComplete="off"
+                autoCorrect="off"
                 />            
             </label>
             {error ? <p className="text-danger">{error.message}</p> : null}

@@ -30,7 +30,7 @@ const Button = ({
       {loading ? (
         <>
           <i className="fas fa-spinner fa-pulse" />
-          <span className="px-2">CARGANDO</span>
+          <span className="px-2">CARGANDO...</span>
         </>
       ) : (
         text
