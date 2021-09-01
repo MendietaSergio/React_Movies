@@ -1,56 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import moviesService from '../API/services/movies'
-import Card from '../components/Card';
+import React from "react";
+import { useState, useEffect } from "react";
+import moviesService from "../API/services/movies";
+import Card from "../components/Card";
 
 const Home = () => {
-  const [movies, setMovies] = useState([]);
-  const [refresh, setRefresh] = useState(true);
-
+  const [movies, setMovies] = useState([]); //inicializar como array vacío
+  const [refresh, setRefresh] = useState(true);//para que refresque la pagina.
+  //callback de useEffect no son asincrono.
   useEffect(() => {
-   if (refresh) {
-     setMovies([]);
-     const fetchMovies = async () => {
+    if(refresh){//si es true, hace el pedido. Si es false, no hace el pedido.
+      const fetMovies = async () => {
         const { data } = await moviesService.getAll();
-        setMovies(data.data)
-     };
-     fetchMovies();
-     setRefresh(false)
-   }
-  }, [refresh]);
-
-  const handleDeleteMovie = (id) => {
-    const deleteMovie = async () => {
-      console.log(id)
-      try {
-        await moviesService.remove(id);
-        setRefresh(true);
-      } catch (error) {
-        console.log(error);
-        setRefresh(true)
-      } finally {
-        window.scroll(0, 0);
-      }
-    };
-    deleteMovie();
-  };
-
+        console.log(data);
+        setMovies(data.data);
+      };
+      fetMovies();
+      setRefresh(false)
+    }
+  }, [refresh]);//cada vez que cambie el valor de 'refresh' se ejecuta useEffect
+  const handleDeleteMovie = async (id) =>{
+    try{
+      await moviesService.remove(id);
+    } catch(error){
+      console.log(error);
+    } finally{
+      setRefresh(true)
+    }
+  }
   return (
     <div className="container">
       <h2 className="text-center my-5">Nuestras películas (todo legal)</h2>
       <section className="row">
-        {
-          movies.map((movie) => (
-            <Card
-              movie={movie}
-              key={movie.id}
-              setRefresh={setRefresh}
-              handleDeleteMovie={handleDeleteMovie}
-            />
-          ))
-        }
+        {movies.map((movie) => (
+          <Card
+            movie={movie}
+            key={movie.id}
+            setRefresh={setRefresh}
+            handleDeleteMovie={handleDeleteMovie}
+          />
+        ))}
       </section>
     </div>
   );
 };
-
 export default Home;

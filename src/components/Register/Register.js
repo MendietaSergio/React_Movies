@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import usersService from "../../API/services/user";
 import validations from "../../validations/registerValidations";
 import Button from "../Button/index";
 import Input from "../Input";
 
-import http from "../../API/axios";
+import usersServices from "../../API/services/user";
 //recibe la variable token
 const Register = ({ className, setToken }) => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +21,7 @@ const Register = ({ className, setToken }) => {
     try {
       setLoading(true);
       // response ESPERA A QUE RESPONDA ALGO.
-      const response = await http.post("register", data);
+      const response = await usersServices.register(data);
       console.log("Respuesta terminada...!");
       console.log(response);
       // const response = usersService.register(data);

@@ -4,24 +4,25 @@ import { useHistory } from 'react-router-dom';
 import validations from '../../validations/registerValidations';
 import Button from '../Button/index';
 import Input from '../Input';
-import userService from '../../API/services/user';
 import Message from '../Message';
-
+import usersService from '../../API/services/user'
+//logear con prueba123456789@gmail.com
+//pass: 123456789
 const Login = ({ className, setToken }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);//estado para cargar btn
+  const [error, setError] = useState(false);//estado para marcar alerta
   const history = useHistory();
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await userService.login(data);
+      const response = await usersService.login(data);
       window.localStorage.setItem('_Token', response.data.token);
       setToken(response.data.token);
       history.push('/');
     } catch (error) {
-      setError(true);
+      setError(true);//al fallar en la API, se cambia el estado de error a true
       console.log(error);
     } finally {
       setLoading(false);
@@ -36,8 +37,8 @@ const Login = ({ className, setToken }) => {
         </div>
         <div className="col-12 col-md-9">
           <Message
-            show={error}
-            setShow={setError}
+            show={error}//le paso el estado en false
+            setShow={setError}//cambio el valor del estado
             message="Credenciales inválidas"
             variant="danger"
             time={5000}

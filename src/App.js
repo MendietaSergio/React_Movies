@@ -18,7 +18,7 @@ function App() {
   const [ token, setToken ] = useState(null);
   return (
     <BrowserRouter>
-    <Header />
+    <Header token={token} setToken={setToken}/>
       <div className="container main-container"><Switch>
         <Route path="/" exact>
           <PrivateRoute token={token} setToken={setToken}>

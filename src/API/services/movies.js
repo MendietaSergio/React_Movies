@@ -1,4 +1,4 @@
-import connect from '../axios';
+import http from '../axios';
 
 const newMovie = (data) => {
   const { title, rating, awards, release_date, length, genre_id } = data;
@@ -6,11 +6,11 @@ const newMovie = (data) => {
 };
 
 const moviesService = {
-  getAll: () => connect.get('api/movies'),
-  getOne: (id) => connect.get(`api/movies/${id}`),
-  create: (data) => connect.post('api/movies/create', newMovie(data)),
-  update: (id, data) => connect.put(`api/movies/update/${id}`, newMovie(data)),
-  remove: (id) => connect.delete(`api/movies/delete/${id}`),
+  getAll: () => http.get('api/movies'),
+  getOne: (id) => http.get(`api/movies/${id}`),
+  create: (data) => http.post('api/movies/create', newMovie(data)),
+  update: (id, data) => http.put(`api/movies/update/${id}`, newMovie(data)),
+  remove: (id) => http.delete(`api/movies/delete/${id}`),
 };
 
 export default moviesService;
