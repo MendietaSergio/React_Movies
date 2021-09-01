@@ -6,11 +6,11 @@ const newMovie = (data) => {
 };
 
 const moviesService = {
-  getAll: () => http.get('api/movies'),
-  getOne: (id) => http.get(`api/movies/${id}`),
-  create: (data) => http.post('api/movies/create', newMovie(data)),
-  update: (id, data) => http.put(`api/movies/update/${id}`, newMovie(data)),
-  remove: (id) => http.delete(`api/movies/delete/${id}`),
+  getAll: () => http.get('api/movies'),//mostrar todas las peliculas
+  getOne: (id) => http.get(`api/movies/${id}`),//para mostrar una pelicula
+  create: (data) => http.post('api/movies/create', newMovie(data)),//crar una pelicula
+  update: (id, data) => http.put(`api/movies/update/${id}`, newMovie(data)),//actualizar una pelicula
+  remove: (id) => http.delete(`api/movies/delete/${id}`),//eliminar una pelicula
 };
 
 export default moviesService;

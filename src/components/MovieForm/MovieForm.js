@@ -14,8 +14,9 @@ const MovieForm = ( {
   loading
 } ) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  //siempre dejar el estado con el tipo de datos que va a recibir, en este caso es un [].
   const [ genres, setGenres ] = useState([]);
-
+  //apenas renderiza, obtengo los gerenos
   useEffect(() => {
    const fetchGenres = async () => {
      try {
@@ -27,7 +28,7 @@ const MovieForm = ( {
      }
    };
    fetchGenres();
-  }, []);
+  }, []);//ejecuta una sola vez.
 
 
   return (
@@ -42,6 +43,7 @@ const MovieForm = ( {
         validation={validations.title}
         error={errors.title}
         defaultValue={movie ? movie.title : null}
+        // si llega una pelicula, ingresa el titulo sino nulo.
       />
       <Input
         className="col-12 col-sm-6"
@@ -88,6 +90,7 @@ const MovieForm = ( {
         error={errors.length}
         defaultValue={movie ? movie.length : null}
       />
+      {/*Si genres tiene valor, se muesta el select, sino nulo.*/}
       {
         genres.length ? (
           <Select

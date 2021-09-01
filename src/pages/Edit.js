@@ -6,29 +6,29 @@ import createFormData from '../utils/createFormData';
 
 
 const Edit = () => {
-  const { id } = useParams();
-  const [ movie, setMovie ] = useState(null);
-  const [ loading, setLoading] = useState();
+  const { id } = useParams();//captura el id por parametros.
+  const [ movie, setMovie ] = useState(null);//estado de movie.
+  const [ loading, setLoading] = useState();//para el boton, cargando...
   const history = useHistory();
 
   useEffect(() => {
+    //siempre tiene que ser asincrono, para eso creo una funcion.
     const fetchMovie = async () => {
       try{
         const response = await moviesService.getOne(id);
-      setMovie(response.data.data);
+        console.log(response.data.data);
+      setMovie(response.data.data);//cambio el estado.
       } catch (error){
         console.log(error);
-      }
-      
+      }  
     };
     fetchMovie();
-  }, [])
+  }, [])//para que se ejecute la primera vez [].
 
-  const submit = async (data) => {
-    
+  const submit = async (data) => {    
       try {
         setLoading(true);
-        await moviesService.update(id, data);
+        await moviesService.update(id, data);//envio id y data
         history.push('/');
       } catch (err) {
         console.log(err);

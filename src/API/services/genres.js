@@ -1,7 +1,7 @@
-import connect from '../axios';
+import http from '../axios';
 
 const genresService = {
-  getAll: () => connect.get('api/genres'),
+  getAll: () => http.get('api/genres'),
 }
 
 export default genresService;

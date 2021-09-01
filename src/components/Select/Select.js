@@ -22,6 +22,7 @@ const Select = ({
             autoCorrect="off"
           >
             <option hidden value="0">{placeholder}</option>
+            {/*Si llega option, itera option */}
             {options &&
               options.map((option) => (
                 <option value={option.id} key={option.id}>{option.name}</option>

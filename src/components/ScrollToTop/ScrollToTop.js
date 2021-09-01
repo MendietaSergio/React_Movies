@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
-const ScrollToTop = ({ children }) => {
+//recibe el childer => lo que llega entre etiquetas
+const ScrollToTop = () => {
+  //
   const location = useLocation();
+  
   useEffect(() => {
+  //scrollearlo hacía arriba.
     window.scroll(0, 0);
-  }, [location.pathname]);
+  }, [location.pathname]);//lo ejecuta siempre que cambie la ruta
 
-  return <>{children}</>;
+  return null;
 };
 
 export default ScrollToTop;
